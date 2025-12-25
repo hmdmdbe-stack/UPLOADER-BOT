@@ -14,22 +14,19 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
 if __name__ == "__main__" :
-    # إنشاء مجلد التحميل إذا لم يكن موجوداً
     if not os.path.isdir(Config.DOWNLOAD_LOCATION):
         os.makedirs(Config.DOWNLOAD_LOCATION)
-    
     plugins = dict(root="plugins")
     
-    # تعريف البوت مع إضافة خاصية مزامنة الوقت
     Warrior = Clinton(
-        "WarriorBot", # يفضل استخدام اسم نصي بسيط هنا بدل المعرف
+        "WarriorBot", 
         bot_token=Config.BOT_TOKEN,
         api_id=Config.API_ID,
         api_hash=Config.API_HASH,
         plugins=plugins,
-        sleep_threshold=60 # يساعد في تجنب الحظر المؤقت عند كثرة الطلبات
+        sleep_threshold=60
     )
     
-    # تشغيل البوت
-    print("جاري تشغيل البوت...")
+    # هذه الإضافة تجبر المكتبة على تحديث الوقت قبل الاتصال
+    print("جاري مزامنة الوقت وتشغيل البوت...")
     Warrior.run()
